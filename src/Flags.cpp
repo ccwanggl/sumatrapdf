@@ -39,7 +39,7 @@ enum class Arg {
     MangaMode = 68, Search = 69, AllUsers = 70, AllUsers2 = 71,
     RunInstallNow = 72, Adobe = 73, DDE = 74, EngineDump = 75,
     SetColorRange = 76, PreviewPipe = 77, IFilterPipe = 78, TestPreviewPipe = 79,
-    UpgradeFrom = 80,
+    UpgradeFrom = 80, TestFilter = 81,
 };
 
 static const char* gArgNames =
@@ -63,7 +63,7 @@ static const char* gArgNames =
     "manga-mode\0" "search\0" "all-users\0" "allusers\0"
     "run-install-now\0" "a\0" "dde\0" "engine-dump\0"
     "set-color-range\0" "preview-pipe\0" "ifilter-pipe\0" "test-preview-pipe\0"
-    "upgrade-from\0";
+    "upgrade-from\0" "test-filter\0";
 // clang-format on
 // @gen-end flags
 
@@ -424,6 +424,11 @@ void ParseFlags(const WCHAR* cmdLine, Flags& i) {
         }
         if (arg == Arg::TestPreview) {
             i.testPreview = true;
+            // remaining args are for the preview test
+            break;
+        }
+        if (arg == Arg::TestFilter) {
+            i.testFilter = true;
             // remaining args are for the preview test
             break;
         }
